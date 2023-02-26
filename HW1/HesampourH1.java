@@ -1,3 +1,4 @@
+package HW1;
 // CSUN SPRING 23   COMP 282 
  // HesampourH1.java generate n random numbers from a to b and print the k numbers per line  
  // Prepared by: Kiarash Hesampour, Feb 4, 23   

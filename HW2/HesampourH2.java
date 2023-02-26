@@ -1,6 +1,7 @@
+package HW2;
 // CSUN COMP 282 Spring 23, Hwk-2  HesampourH2.java
 // External Sorting - using Normal Sort
-// Author: G. Dastghaiby Fard
+// Author: K Hesampour
 
 import java.util.*;
 import java.io.*;
