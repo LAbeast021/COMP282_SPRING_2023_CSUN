@@ -55,7 +55,7 @@ public class HesampourH2{
 		int m;
 		// convert to maxheap
 		for(m= n/2; m >= 1; m--) 
-			maxheapdn(a, i, n);	
+			maxheapdn(a, m, n);	
 		//end for
 		
 		for(m= n; m > 1; m--){
@@ -66,8 +66,21 @@ public class HesampourH2{
 	
 	// maxheapdn(a[], int m, int n)
 	private void maxheapdn(int a[], int m, int n){
-		//Complete this Method
-	} // end maxheapdn(int a[], int m, int n)
+		int lc;
+		while (( 2 * m) <= n){
+			lc = m*2 ; 
+			if ((m*2) + 1 < n+1 && a[(m*2) + 1] > a[lc]) {
+				lc = (m*2) + 1 ;
+			}
+			if (a[m] < a[lc]) {
+				swap (a,m, lc); 
+				m = lc; 
+			}
+			else {
+				break ;
+			}
+		};
+	}; // end maxheapdn(int a[], int m, int n)
 	
    // Normal sort process method using arrays size M
    private void process(String fn, int M){ 
