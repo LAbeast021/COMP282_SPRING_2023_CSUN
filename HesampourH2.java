@@ -111,7 +111,7 @@ public class HesampourH2{
 		srt.process(fn, M); 
 			
 		//Replace ????????? with your name in next line
-		System.out.printf("\n\n\tAuthor: ????????? Date: %s\n",
+		System.out.printf("\n\n\tAuthor: K. Hesampour Date: %s\n",
 		java.time.LocalDate.now());
 	}	// end main
 } // end HesampourH2
