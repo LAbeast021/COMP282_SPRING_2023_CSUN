@@ -43,8 +43,31 @@ public class HesampourH2{
 	} // end prtfiles	
 
 	// SortNormal, with arrays of size M
-	private int SortNormal(String fn, int M){//regular sort
-		//Complete this Method
+	private int SortNormal(String fn, int M) throws FileNotFoundException{//regular sort
+		Scanner inf = new Scanner(new File(fn));
+		int i = 0 , j  , k , p;
+		while (inf.hasNext()) {
+			int arr[] = new int [M+1];
+			j = 1 ;
+			for (k = 1 ; k <= M && inf.hasNext() ; k++)  {
+				arr[k] = inf.nextInt(); 
+			}
+			i++;
+			heapsort(arr, k-1);
+			String fname = "F" + i +".txt"; 
+			PrintWriter opf = new PrintWriter(new File(fname));
+			for (p = 1 ; p <= k-1; p++){ 
+				opf.printf("%5d", arr[p]); 
+      			if (p %10 == 0) {
+					opf.printf("\n"); 
+				};	
+			}
+			opf.close();  
+		};
+		inf.close(); 
+		return i;
+
+
 	} // end SortNormal
 
 	private void swap(int a[], int i, int j){
@@ -83,7 +106,7 @@ public class HesampourH2{
 	}; // end maxheapdn(int a[], int m, int n)
 	
    // Normal sort process method using arrays size M
-   private void process(String fn, int M){ 
+   private void process(String fn, int M) throws FileNotFoundException{ 
 		int n;
 		prt.print("\n\tExternal Sorting Java program that:\n\t"+
 		"gets array size and inputfilename from \n\t"+
