@@ -5,7 +5,7 @@
 import java.util.*;
 import java.io.*;
 
-public class HesampourH3{
+public class HxxxxxH3{
 	
     //use prt for System.out to save typing	
 	PrintStream prt = System.out;	
@@ -63,7 +63,7 @@ public class HesampourH3{
 					inheap ++ ;
 				}
 				else {
-					opf.printf("%5d", arr[1]);
+					opf.printf(" %5d ", arr[1]);
 					lastElement = arr[1] ; 
 					if (!inf.hasNext()){ 
 						for ( k = 1; k < heapSize+inheap; k ++) {
@@ -77,6 +77,7 @@ public class HesampourH3{
 				}
 				heapsort(arr, heapSize);
 			} 
+			opf.printf(" 2147483647");
 			opf.close(); 
 			if (inheap == 0) break;
 			heapSize = inheap;
@@ -159,7 +160,7 @@ public class HesampourH3{
 		System.out.printf("\n\tInput:%s, array size=%d", fn, M);
 			
 		// create an instance of HesampourH2 class
-		HesampourH3 srt = new HesampourH3();
+		HxxxxxH3 srt = new HxxxxxH3();
 		
 		// call process method
 		srt.process(fn, M); 
