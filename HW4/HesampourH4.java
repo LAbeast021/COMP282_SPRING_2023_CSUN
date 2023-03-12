@@ -1,3 +1,4 @@
+package HW4;
 import java.util.*;
 import java.io.*;
 // CSUN COMP 282 Spring 23, HesampourH4.java
