@@ -38,9 +38,9 @@ public class HesampourH5 {
 
 	private void mergeKway(int k) throws FileNotFoundException{
         int i , p , j , smallVal , smallIdx , countOfIntMax = 0  ;
-        int[][] array = new int[k][count]; 
+        int[][] array = new int[k][count+1]; 
         String fname ;
-        for (i = 1; i <= k; i++){
+        for (i = 1; i <= k; i ++){
 			fname = "F" + i + ".txt";
             Scanner inf = new Scanner(new File(fname));
             j = 0 ;
@@ -48,6 +48,7 @@ public class HesampourH5 {
                 array[i-1][j++] = inf.nextInt();
             }
             array[i-1][j] = Integer.MAX_VALUE; 
+            inf.close();
 		}
 
         fname = "F" + i + ".txt";
@@ -55,25 +56,37 @@ public class HesampourH5 {
 
         smallVal = array[0][0];
         smallIdx = 0;
+        
         while (countOfIntMax != k) {
             for (i = 0 ; i < k ;i++) {
-                if (array[i][0] < smallVal && array[i][0] != Integer.MAX_VALUE) {
+                if (array[i][0] < smallVal && array[smallIdx][0] != Integer.MAX_VALUE) {
                     smallVal = array[i][0];
                     smallIdx = i;
                 }
-                if (array[i][0] == Integer.MAX_VALUE) {
+                if (array[smallIdx][0] == Integer.MAX_VALUE) {
                     countOfIntMax += 1 ;
                 }
     
             }
-            otf.printf(" %3d " , smallVal);
-            for (p = 0 ; p < count ; p++){
-                array[smallIdx][p] = array[smallIdx][p+1] ;
+			if (smallVal != Integer.MAX_VALUE){
+				otf.printf(" %3d " , smallVal);
+			}
+
+			
+            for (p = 0; p < count  ; p++){
+				if (array[smallIdx][p+1] != Integer.MAX_VALUE ){
+					array[smallIdx][p] = array[smallIdx][p + 1] ;
+				}
+				else {
+					array[smallIdx][p] = array[smallIdx][p + 1] ;
+					break ;
+				}
             }
-
+            smallVal = array[smallIdx][0];
         }
-        
-
+        prt.printf(" \ninja %d , %d  " , smallVal , smallIdx) ;
+        otf.close();
+        prtfile(fname);
 	} 
 
 	public static void main(String[] args) throws Exception{
