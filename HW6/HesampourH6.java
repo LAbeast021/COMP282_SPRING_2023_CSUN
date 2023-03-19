@@ -1,3 +1,4 @@
+package HW6;
 // CSUN Spring 23 COMP282       HesampourH6.java
 // JAVA implementation of Binary Search Tree (BST) 
 
