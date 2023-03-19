@@ -37,8 +37,8 @@ public class HesampourH5 {
 	} // end prtfile
 
 	private void mergeKway(int k) throws FileNotFoundException{
-        int i , j  ;
-        int[][] array = new int[k][count+1]; 
+        int i , p , j , smallVal , smallIdx , countOfIntMax = 0  ;
+        int[][] array = new int[k][count]; 
         String fname ;
         for (i = 1; i <= k; i++){
 			fname = "F" + i + ".txt";
@@ -49,8 +49,31 @@ public class HesampourH5 {
             }
             array[i-1][j] = Integer.MAX_VALUE; 
 		}
+
         fname = "F" + i + ".txt";
         PrintWriter otf = new PrintWriter(new File(fname));
+
+        smallVal = array[0][0];
+        smallIdx = 0;
+        while (countOfIntMax != k) {
+            for (i = 0 ; i < k ;i++) {
+                if (array[i][0] < smallVal && array[i][0] != Integer.MAX_VALUE) {
+                    smallVal = array[i][0];
+                    smallIdx = i;
+                }
+                if (array[i][0] == Integer.MAX_VALUE) {
+                    countOfIntMax += 1 ;
+                }
+    
+            }
+            otf.printf(" %3d " , smallVal);
+            for (p = 0 ; p < count ; p++){
+                array[smallIdx][p] = array[smallIdx][p+1] ;
+            }
+
+        }
+        
+
 	} 
 
 	public static void main(String[] args) throws Exception{
