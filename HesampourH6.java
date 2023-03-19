@@ -17,9 +17,9 @@ public class HesampourH6{
 		int phone;
 		node ll, rl;  //left and right link
 		// node  constructor
-		node(String n , int x) {
-			name  = n ;
-			phone = x;
+		node(String nam , int ph) {
+			name  = nam ;
+			phone = ph;
 			rl = ll = null;
 		}  //end node constructor
     }  // end class node
@@ -87,31 +87,7 @@ public class HesampourH6{
 		return 0;    
 	} // end search (x, t)
 
-   //print contents of the BST level by level
-   private void prtbylevel(){
-	//print BST level by level
-	  if (root == null){
-		prt.printf("\n\tBtree is empty.");
-		return;
-	  }
-	  // Create a java queue q
-	  Queue<node> q = new LinkedList();
-	  prt.printf("\n\n\tContent of BST Level by Level:\n\t");
-	  String last;
-	  node t = root;
-	  last = t.name;
-	  q.add(t);
-	  while (q.size()>0){//while q is not empty
-		t = q.remove();//retrieve frontq and delete
-		if(last.compareTo(t.name) > 0)prt.printf("\n\t");
-		prt.printf("(%s : %d), ",t.name ,  t.phone);	
-		if (t.ll != null) 
-			q.add(t.ll);
-		if (t.rl != null) 
-			q.add(t.rl); 
-		last = t.name;
-	  } // end while
-   }// end prtbylevel()
+   
 
 	//preorder traversal of BST
 	private void preorder(){
@@ -222,8 +198,6 @@ public class HesampourH6{
 			// close input file 		
 			inf.close();   
 		}catch (Exception e){prt.printf("\n\tRead Error! %s", e);}
-		// print BST level by level
-		prtbylevel();
 	} // end process(fname)
   
   //  main method
