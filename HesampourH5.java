@@ -9,6 +9,7 @@ import java.io.*;
 public class HesampourH5 {
 	//use prt for System.out to save typing
 	PrintStream prt = System.out;
+    int count = 0 ;
 	
 	// print file contents
 	private void prtfile(String fn){
@@ -28,31 +29,51 @@ public class HesampourH5 {
 			prt.printf("(count=%d)", i);
 			// close file
 			inf.close();
+            if (count < i) {
+                count = i;
+            }
 		} catch (IOException e){
 			prt.printf("\nOoops! Read Exception: %s", e);}
 	} // end prtfile
 
-	private void mergeKway(String fn1, String fn2, String fn3) throws FileNotFoundException{
-		
-	} // end mergeKway
+	private void mergeKway(int k) throws FileNotFoundException{
+        int i , j  ;
+        int[][] array = new int[k][count+1]; 
+        String fname ;
+        for (i = 1; i <= k; i++){
+			fname = "F" + i + ".txt";
+            Scanner inf = new Scanner(new File(fname));
+            j = 0 ;
+            while (inf.hasNextInt()) {
+                array[i-1][j++] = inf.nextInt();
+            }
+            array[i-1][j] = Integer.MAX_VALUE; 
+		}
+        fname = "F" + i + ".txt";
+        PrintWriter otf = new PrintWriter(new File(fname));
+	} 
 
-	public static void main(int[] args) throws Exception{
-		int cnt = args.length , k; // get no. of atguments
+	public static void main(String[] args) throws Exception{
+		int cnt = args.length , k , i; // get no. of atguments
+        String fname ;
 
 		if (cnt < 1){
 		    System.out.printf("\n\tOOOPS Invalid No. of aguments!"+
-			"\n\tTO Execute: java HesampourH5  f1 f2 f3");
+			"\n\tTO Execute: java HesampourH5 ");
 			return;
 		} // end if	
 		// get input file name
-		k = args[0]; 
+		k = Integer.parseInt(args[0]); 
 
 		HesampourH5  srt = new HesampourH5() ;
-		//Print input files
-		// srt.prtfile(fn1);
-		// srt.prtfile(fn2);
+
+        for (i = 1; i <= k; i++){
+			fname = "F" + i + ".txt";
+			srt.prtfile(fname);
+		}
+
 		// //Call mergeKway
-		// srt.mergeKway(fn1, fn2, fn3);
+		srt.mergeKway(k);
 		// //Print output file
 		// srt.prtfile(fn3);
 		
