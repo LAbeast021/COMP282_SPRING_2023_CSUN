@@ -9,28 +9,56 @@ public class HesamH8 {
     // use prt for System.out to save typing
     PrintStream prt = System.out;
 
-     static int d[] ;
+     static int[] d ;
+     static int[][] M;
+     static int[][] F;
 
 
 
 
-    // private void showorder(int i, int j){
-    //     int k;
-    //     if ( i == j){
-    //         System.out.printf("A%d ", i);
-    //     }
-    //     else{
-    //         k = F[i][j];
-    //         prt.print("(");
-    //         showorder(i, k);
-    //         prt.print ("*");
-    //         showorder(k+1, j);
-    //         prt.print(")");
-    //     } // end else
-    // }
-    // private int dpMCM (int n){
+    private void showorder(int i, int j){
+        int k;
+        if ( i == j){
+            System.out.printf("A%d ", i);
+        }
+        else{
+            k = F[i][j];
+            prt.print("(");
+            showorder(i, k);
+            prt.print ("*");
+            showorder(k+1, j);
+            prt.print(")");
+        } // end else
+    }
 
-    // }
+    private int dpMCM (int n){
+        M = new int [n+1][n+1] ;
+        F = new int [n+1][n+1] ;
+        int diag , i , j ;
+        // for (diag = n ; ;diag += 1) {
+        //     for (i = 1 ; i <= n-diag ; i ++ ) {
+        //         j = i + diag ;
+        //     }
+
+        // }
+        for ( i = 1; i <= n; i++) {
+                M[i][i] = 0;
+            }
+        for (int l = 2; l <= n; l++) {
+            for ( i = 1; i <= n - l + 1; i++) {
+                 j = i + l - 1;
+                M[i][j] = Integer.MAX_VALUE;
+                for (int k = i; k <= j - 1; k++) {
+                    int tmp = M[i][k] + M[k + 1][j] + d[i - 1] * d[k] * d[j];
+                    if (tmp < M[i][j]) {
+                        M[i][j] = tmp;
+                        F[i][j] = k;
+                    }
+                }
+            }
+        }
+            return M[1][n];
+    }
 
     private int recMCM (int i, int j){
         if (i == j) return 0;
@@ -67,7 +95,7 @@ public class HesamH8 {
 		} catch (Exception e){prt.printf("\n\tRead Error! %s", e);}
         min1 = recMCM(1, numberOfMatrices); 
         prt.printf(" \n\n\t %2d, \n ", min1);
-        // min2 = dpMCM(numberOfMatrices);
+        min2 = dpMCM(numberOfMatrices);
     }
    
 
