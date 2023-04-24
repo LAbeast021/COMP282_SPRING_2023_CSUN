@@ -34,21 +34,15 @@ public class HesamH8 {
     private int dpMCM (int n){
         M = new int [n+1][n+1] ;
         F = new int [n+1][n+1] ;
-        int diag , i , j ;
-        // for (diag = n ; ;diag += 1) {
-        //     for (i = 1 ; i <= n-diag ; i ++ ) {
-        //         j = i + diag ;
-        //     }
-
-        // }
+        int i , j , l , k ;
         for ( i = 1; i <= n; i++) {
                 M[i][i] = 0;
             }
-        for (int l = 2; l <= n; l++) {
+        for ( l = 2; l <= n; l++ ) {
             for ( i = 1; i <= n - l + 1; i++) {
                  j = i + l - 1;
                 M[i][j] = Integer.MAX_VALUE;
-                for (int k = i; k <= j - 1; k++) {
+                for ( k = i; k <= j - 1; k++) {
                     int tmp = M[i][k] + M[k + 1][j] + d[i - 1] * d[k] * d[j];
                     if (tmp < M[i][j]) {
                         M[i][j] = tmp;
@@ -57,14 +51,16 @@ public class HesamH8 {
                 }
             }
         }
-            return M[1][n];
+        prt.printf(" \n\n\t min no. of multiplication to multiply A1 X ...X A%2d calculated using dpMCM method is : %2d \n\t", n , M[1][n]);
+        showorder(1, n);
+        return M[1][n];
     }
 
     private int recMCM (int i, int j){
         if (i == j) return 0;
         int min = Integer.MAX_VALUE , k , m;
         for ( k = i ; k < j ; k++) {
-            m = recMCM(i, k) + recMCM(k+1, j) + (d[i-1] * d[i-1] * d[k] * d[j]) ;
+            m = recMCM(i, k) + recMCM(k+1, j) + (d[i-1] * d[k] * d[j]) ;
             if (m < min) {
                 min = m ;
             }
@@ -94,8 +90,9 @@ public class HesamH8 {
 			inf.close();   
 		} catch (Exception e){prt.printf("\n\tRead Error! %s", e);}
         min1 = recMCM(1, numberOfMatrices); 
-        prt.printf(" \n\n\t %2d, \n ", min1);
+        prt.printf(" \n\n\t min no. of multiplication to multiply A1 X ...X A%2d calculated using recMCM method is : %2d \n\t", numberOfMatrices , min1);
         min2 = dpMCM(numberOfMatrices);
+        // prt.printf(" \n\n\t min no. of multiplication to multiply A1 X ...X A%2d calculated using dpMCM method is : %2d \n\t", numberOfMatrices , min2);
     }
    
 
