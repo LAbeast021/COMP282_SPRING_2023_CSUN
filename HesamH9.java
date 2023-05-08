@@ -29,6 +29,8 @@ import java.util.*;
 	//DFS from nodex
 	private void dfs(int nodex){
 		//COMPLETE THIS METHOD (50 POINTS)
+		visit[nodex] = 1; 
+		prt.printf("%d" , nodex);
 	} // end DFS from nodex
 
 	// DFS from nodex
@@ -43,14 +45,36 @@ import java.util.*;
 	
 	// Dijkstra Shortest Path algorithm from nodex
 	private void dijkstra(int nodex){//  shortes
-		int i;
+		int i , j;
 		//Allocate space for dist[]
 		int[] dist = new int[nodes+1]; 
 		// initialize dist[]
 		for (i = 1; i <= nodes; i++){
 		  dist[i] = g[nodex][i];
 		}
-		//COMPLETE THIS METHOD (50 POINTS)
+		int[] visited = new int[nodes + 1];
+    	visited[nodex] = 1;
+
+		for (i = 2; i <= nodes; i++) {
+			int min_dist = max;
+			int v = -1;
+			for (j = 1; j <= nodes; j++) {
+				if (visited[j] == 0 && dist[j] < min_dist) {
+					min_dist = dist[j];
+					v = j;
+				}
+			}
+			if (v == -1) {
+				break;
+			}
+			visited[v] = 1;
+			for (j = 1; j <= nodes; j++) {
+				if (g[v][j] < max && visited[j] == 0 && dist[v] + g[v][j] < dist[j]) {
+					dist[j] = dist[v] + g[v][j];
+				}
+			}
+		}
+	
 		prt.printf("\n\tDijkstra Shortest distance from node %d:", nodex);
 		for (i = 1; i <= nodes; i++) 
 			prt.printf("%5d ", dist[i]);		
@@ -136,6 +160,6 @@ import java.util.*;
 		g.process(fn); 
 			
 		//MAKE SURE TO WRITE YOUR NAME IN NEXT LINE		
-		System.out.printf("\n\tAuthor: Gh. Dastghaibyfard Date: " + java.time.LocalDate.now()); 
+		System.out.printf("\n\tAuthor: K. Hesampour Date: " + java.time.LocalDate.now()); 
 	}	// end main
 } // end xxxxxH9 OPTIONAL
