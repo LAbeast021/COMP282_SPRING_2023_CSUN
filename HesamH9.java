@@ -40,7 +40,20 @@ import java.util.*;
 
 	// DFS from nodex
 	private void bfs(int nodex){
-		//COMPLETE THIS METHOD (50 POINTS)
+		 int[] visited = new int[nodes+1];
+		 Queue<Integer> queue = new LinkedList<>();
+		 visited[nodex] = 1;
+		 queue.add(nodex);
+		 while (!queue.isEmpty()) {
+			 nodex = queue.poll();
+			 prt.printf("%d  ", nodex);
+			 for (int i = 1; i <= nodes; i++) {
+				 if (g[nodex][i] != max && visited[i] == 0) {
+					 visited[i] = 1;
+					 queue.add(i);
+				 }
+			 }
+		 }
 	} // end DFS from nodex
 
 	// Prim's MST algorithm 
