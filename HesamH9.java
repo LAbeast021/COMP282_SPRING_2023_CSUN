@@ -101,9 +101,8 @@ import java.util.*;
 	// Dijkstra Shortest Path algorithm from nodex
 	private void dijkstra(int nodex){//  shortes
 		int i , j;
-		//Allocate space for dist[]
 		int[] dist = new int[nodes+1]; 
-		// initialize dist[]
+		
 		for (i = 1; i <= nodes; i++){
 		  dist[i] = g[nodex][i];
 		}
