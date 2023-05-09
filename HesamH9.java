@@ -41,13 +41,14 @@ import java.util.*;
 	// DFS from nodex
 	private void bfs(int nodex){
 		 int[] visited = new int[nodes+1];
+		 int i ;
 		 Queue<Integer> queue = new LinkedList<>();
 		 visited[nodex] = 1;
 		 queue.add(nodex);
 		 while (!queue.isEmpty()) {
 			 nodex = queue.poll();
 			 prt.printf("%d  ", nodex);
-			 for (int i = 1; i <= nodes; i++) {
+			 for (i = 1; i <= nodes; i++) {
 				 if (g[nodex][i] != max && visited[i] == 0) {
 					 visited[i] = 1;
 					 queue.add(i);
@@ -58,39 +59,39 @@ import java.util.*;
 
 
 	private void prim() {
-		int[] parent = new int[nodes + 1];
-		int[] key = new int[nodes + 1]; 
+		int[] lowCost = new int[nodes + 1];
+		int[] closest = new int[nodes + 1]; 
 	
-		Arrays.fill(key, max);
+		Arrays.fill(closest, max);
+		Arrays.fill(visit, 0);
 	
 		PriorityQueue<Integer> pq = new PriorityQueue<>(nodes, new Comparator<Integer>() {
 			@Override
 			public int compare(Integer i, Integer j) {
-				return key[i] - key[j];
+				return closest[i] - closest[j];
 			}
 		});
 	
-		int src = 1;
-		pq.offer(src);
-		key[src] = 0;
+		int V = 1;
+		pq.offer(V);
+		closest[V] = 0;
 	
 		while (!pq.isEmpty()) {
 			int u = pq.poll();
-	
-			// Add u to MSTSet
+
 			visit[u] = 1;
 			for (int v = 1; v <= nodes; v++) {
 				int weight = g[u][v];
-				if (weight < Integer.MAX_VALUE && visit[v] == 0 && weight < key[v]) {
-					key[v] = weight;
+				if (weight < max && visit[v] == 0 && weight < closest[v]) {
+					closest[v] = weight;
 					pq.offer(v);
-					parent[v] = u;
+					lowCost[v] = u;
 				}
 			}
 		}
-	
+		
 		for (int i = 2; i <= nodes; i++) {
-			prt.printf("(%d, %d) ", parent[i], i);
+			prt.printf(" %d -  ", lowCost[i]);
 		}
 		prt.printf("\n");
 	}
