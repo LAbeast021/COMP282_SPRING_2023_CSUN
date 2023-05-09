@@ -56,11 +56,47 @@ import java.util.*;
 		 }
 	} // end DFS from nodex
 
-	// Prim's MST algorithm 
-	private void prim(){
-		//COMPLETE THIS METHOD (50 POINTS)
-	}// end prim's algorithm
+
+	private void prim() {
+		int[] parent = new int[nodes + 1];
+		int[] key = new int[nodes + 1]; 
 	
+		Arrays.fill(key, max);
+	
+		PriorityQueue<Integer> pq = new PriorityQueue<>(nodes, new Comparator<Integer>() {
+			@Override
+			public int compare(Integer i, Integer j) {
+				return key[i] - key[j];
+			}
+		});
+	
+		int src = 1;
+		pq.offer(src);
+		key[src] = 0;
+	
+		while (!pq.isEmpty()) {
+			int u = pq.poll();
+	
+			// Add u to MSTSet
+			visit[u] = 1;
+			for (int v = 1; v <= nodes; v++) {
+				int weight = g[u][v];
+				if (weight < Integer.MAX_VALUE && visit[v] == 0 && weight < key[v]) {
+					key[v] = weight;
+					pq.offer(v);
+					parent[v] = u;
+				}
+			}
+		}
+	
+		for (int i = 2; i <= nodes; i++) {
+			prt.printf("(%d, %d) ", parent[i], i);
+		}
+		prt.printf("\n");
+	}
+		
+	
+
 	// Dijkstra Shortest Path algorithm from nodex
 	private void dijkstra(int nodex){//  shortes
 		int i , j;
