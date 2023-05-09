@@ -30,7 +30,7 @@ import java.util.*;
 	private void dfs(int nodex){
 		//COMPLETE THIS METHOD (50 POINTS)
 		visit[nodex] = 1; 
-		prt.printf("%d" , nodex);
+		prt.printf("%d  " , nodex);
 		for(int i = 1; i <= nodes; i++) {
 			if(g[nodex][i] != max && visit[i] == 0) {
 				dfs(i);
